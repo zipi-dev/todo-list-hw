@@ -6,6 +6,9 @@ const [newTask, setNewTask] = useState('');
 
 const handleSubmit = (e) => {
     e.preventDefault(); 
+    if (newTask.trim() === '' || tasks.includes(newTask.trim())) {
+      return; 
+    }
     setTasks([...tasks, newTask]); 
     setNewTask(''); 
   };
