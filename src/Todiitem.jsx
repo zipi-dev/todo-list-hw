@@ -1,15 +1,20 @@
-export default function Todiitem({ task }) {
+export default function Todiitem({ task, onComplete }) {
   const getTaskStyle = () => {
     return {
-      color: task.completed ? 'green' : 'red', // ירוק אם בוצע, אדום אם לא
-      textDecoration: task.completed ? 'line-through' : 'none' 
+      color: task.completed ? 'green' : 'red',
+      textDecoration: task.completed ? 'line-through' : 'none'
     };
   };
 
-return (
+  return (
     <li style={getTaskStyle()}>
       {task.title}
-    </li> 
-)
-
+      
+      {!task.completed && (
+        <button onClick={() => onComplete(task.id)}>
+          המשימה בוצעה
+        </button>
+      )}
+    </li>
+  );
 }
