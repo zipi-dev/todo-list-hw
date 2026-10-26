@@ -1,5 +1,7 @@
 import { useState } from "react";
-import Todiitem from './Todiitem.jsx'
+import Todiitem from './Todiitem.jsx';
+import TodoForm from './TodoForm.jsx';
+
 export default function TodoList() {
 
   const [tasks, setTasks] = useState([
@@ -8,14 +10,9 @@ export default function TodoList() {
     { id: 3, title: 'go to the gym', completed: false }
   ]);
 
-  const [newTask, setNewTask] = useState('');
 
-const handleSubmit = (e) => {
-    e.preventDefault(); 
-    if (newTask.trim() === ''|| tasks.some(task => task.title === newTask.trim())) {
-      return; 
-    }
-
+  const handleAddTask = (titleText) => {
+    if (tasks.some(task => task.title === titleText)) return;
     const newTaskObject = {
       id: Date.now(),            
       title: newTask.trim(),     // הטקסט שהוקלד
@@ -29,13 +26,8 @@ const handleSubmit = (e) => {
 return (
     <>
       <h2>Tasks </h2>
-      <form onSubmit={handleSubmit}>
-        <input type="text"
-         placeholder="הכנס משימה חדשה..." 
-         value={newTask}
-        onChange={(e) => setNewTask(e.target.value)}/>
-        <button type="submit">אישור</button>
-      </form>
+      <TodoForm onAdd={handleAddTask} />
+
       <ul>
         {tasks.map((task) => (
           <Todiitem key={task.id} task={task} />
