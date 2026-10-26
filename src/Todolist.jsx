@@ -1,8 +1,14 @@
 import { useState } from "react";
 import Todiitem from './Todiitem.jsx'
 export default function TodoList() {
-const [tasks, setTasks] = useState(['hw react','complete something','go to the gym']);
-const [newTask, setNewTask] = useState('');
+
+  const [tasks, setTasks] = useState([
+    { id: 1, title: 'hw react', completed: false },
+    { id: 2, title: 'complete something', completed: true },
+    { id: 3, title: 'go to the gym', completed: false }
+  ]);
+
+  const [newTask, setNewTask] = useState('');
 
 const handleSubmit = (e) => {
     e.preventDefault(); 
@@ -24,8 +30,8 @@ return (
         <button type="submit">אישור</button>
       </form>
       <ul>
-        {tasks.map((task, index) => (
-          <Todiitem key={index} task={task} />
+        {tasks.map((task) => (
+          <Todiitem key={task.id} task={task.title} />
         ))}
       </ul>
     </>
