@@ -31,7 +31,7 @@ return (
       </form>
       <ul>
         {tasks.map((task) => (
-          <Todiitem key={task.id} task={task.title} />
+          <Todiitem key={task.id} task={task} />
         ))}
       </ul>
     </>
