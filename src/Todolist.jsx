@@ -12,10 +12,17 @@ export default function TodoList() {
 
 const handleSubmit = (e) => {
     e.preventDefault(); 
-    if (newTask.trim() === '' || tasks.includes(newTask.trim())) {
+    if (newTask.trim() === ''|| tasks.some(task => task.title === newTask.trim())) {
       return; 
     }
-    setTasks([...tasks, newTask]); 
+
+    const newTaskObject = {
+      id: Date.now(),            
+      title: newTask.trim(),     // הטקסט שהוקלד
+      completed: false         
+    };
+
+    setTasks([...tasks, newTaskObject]); 
     setNewTask(''); 
   };
 
